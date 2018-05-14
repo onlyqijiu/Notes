@@ -1,3 +1,4 @@
+﻿//linux 
 初次安装git配置用户名和邮箱
 
 原文链接：https://www.cnblogs.com/superGG1990/p/6844952.html
@@ -108,3 +109,98 @@ git remote set-url origin git@github.com:someaccount/someproject.git
 然后你可以再用命令 git remote -v 查看一下，url是否已经变成了ssh地址。
 
 然后你就可以愉快的使用git fetch, git pull , git push，再也不用输入烦人的密码了
+
+
+
+
+//windows10
+第一步：检查SSH Keys
+首先，我们要检查你电脑 上已经存在的SSH Keys，打开你的GitBash，输入
+
+$ cd ~/.ssh
+
+$ ls -al
+
+#列出你的.SSH目录中的文件
+
+ 如果用户目录 没有.ssh这个目录 说明你没有。（这句是我加的）
+
+检查目录列表里面是否有文件名为id_rsa.pub 或 id_dsa.pub 如果两个文件你都没有，到第二步，否则，步到第三步
+
+第二步：生成一个新的SSH Key
+为了生成一个新的SSH Key，复制粘贴下面的文本，确保替换为你的电子邮件地址。默认设置是首选的，所以当你被
+
+问到“输入一个文件来保存密钥”，只要按下回车键继续就行。
+
+$ ssh-keygen -t rsa -C your-email
+
+$ 询问保存目录，直接回车
+
+下一步，你会被要求输入一个密码。
+
+提示：我们强烈建议使用一个好的，安全的密码，到Working with SSH Key passphrases查看更多信息。
+
+$ 输入密码
+
+$ 再次输入密码，要求两次一致。
+
+你应该会得到如下信息：
+
+信息提示你生成成功，密钥保存在哪里，指纹码是多少。
+
+然后添加你的密钥到ssh-agent.
+
+$ eval `ssh-agent -s`
+
+$ ssh-add ~/.ssh/id_rsa
+
+这会要求你输入 生成密钥时的密码，反正我操作时提示了（这句是我加的）
+
+第三步：添加你的SSH Key 到GitHub
+运行以下命令复制key到你的剪贴板。
+
+$ clip < ~/.ssh/id_rsa.pub
+
+另一种选择，可以使用你最喜欢的文本编辑器，手动打开文件并复制内容到剪贴板。
+
+现在你已经复制了密钥，是时候把它添加到GitHub了。
+
+1、在任意GitHub页面顶部右角落用户面板处。点击Account settings.
+
+2、点击左侧边栏SSH Keys按钮。
+
+3、点击Add SSH Key
+
+4、在标题域，为一个新的密钥添加一个描述，例如，如果你正在使用个人的MAC，你可以叫这个密钥“个上Mac Book...”
+
+5、粘贴你的密钥到Key域。
+
+6、点击Add Key
+
+7、输入你的GitHub密码确认这个动作。
+
+第四步：测试所有输出
+确保所有事情正常运行，你现在要尝试一下SSH连接GitHub，当你做此动作时，你会被要求用你之前创建的密码来授权这
+
+个动作。打开你的Git Bash，输入 ：
+
+$ ssh -T git@github.com
+
+#尝试用ssh连接github
+
+你也许会看到如这样的警告：
+
+..................
+
+不要担心，意料之中，检验终端 中的指纹码是否和我们上面提供的指纹码。然后输入yes
+
+提示信息，连接成功..................
+
+如果用户名是你的用户名，你已经成功设置了你的SSH Key，不要担心"shell access"这个事，反正你不希望这样。
+
+如果你收到一个信息"access denied"(访问拒绝),你可以读诊断这个问题的介绍
+
+
+如果你正要从HTTPS切换到SSH，你会需要更新你的远程仓库地址。
+
+查看"Changing a remote's RUL"(改变远程URL)以得到更多信息。（同样移步我翻译的文章改变GitHub远程地址）
