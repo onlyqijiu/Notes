@@ -1,0 +1,19 @@
+
+当我尝试启动VMWARE-WORKSTATION时，我收到以下错误：
+
+在运行VMware之前，必须编译几个模块并将其加载到内核CANCEL / INSTALL中
+
+没有错误，当我选择INSTALL时，没有任何事情发生，只是关闭。
+
+我手动安装：
+
+sudo apt-get install open-vm-tools open-vm-tools-dev open-vm-dkms open-vm-toolbox open-vm-tools-dev
+（因为@ pst007x执行，我不确定这对我的问题有什么影响）
+
+cd /lib/modules/$(uname -r)/build/include/linux 
+sudo ln -s ../generated/utsrelease.h 
+sudo ln -s ../generated/autoconf.h 
+sudo ln -s ../generated/uapi/linux/version.h
+我按照@Qasim的建议运行了以下代码
+
+sudo vmware-modconfig --console --install-all
