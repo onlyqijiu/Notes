@@ -1,0 +1,37 @@
+ dpkg: 处理归档 /var/cache/apt/archives/swig2.0_2.0.12-1ubuntu4_amd64.deb (--unpack)时出错：
+
+问题：
+
+sudo apt-get upgrade
+
+正在读取软件包列表... 完成
+
+正在分析软件包的依赖关系树
+正在读取状态信息... 完成
+正在计算更新... 完成
+下列软件包的版本将保持不变：
+libegl1-mesa libgbm1 libgl1-mesa-dri libwayland-egl1-mesa libxatracker2
+mesa-vdpau-drivers swig
+下列软件包将被升级：
+swig2.0
+升级了 1 个软件包，新安装了 0 个软件包，要卸载 0 个软件包，有 7 个软件包未被升级。
+有 3 个软件包没有被完全安装或卸载。
+需要下载 891 kB 的归档。
+解压缩后会消耗 310 kB 的额外空间。
+您希望继续执行吗？ [Y/n] y
+获取:1 http://archive.ubuntu.com/ubuntu xenial/universe amd64 swig2.0 amd64 2.0.12-1ubuntu4 [891 kB]
+已下载 891 kB，耗时 35秒 (24.9 kB/s)
+(正在读取数据库 ... 系统当前共安装有 247596 个文件和目录。)
+正准备解包 .../swig2.0_2.0.12-1ubuntu4_amd64.deb ...
+正在将 swig2.0 (2.0.12-1ubuntu4) 解包到 (2.0.12-1ubuntu1) 上 ...
+dpkg: 处理归档 /var/cache/apt/archives/swig2.0_2.0.12-1ubuntu4_amd64.deb (--unpack)时出错：
+正试图覆盖 /usr/bin/swig，它同时被包含于软件包 swig 2.0.12-1ubuntu1
+正在处理用于 man-db (2.7.5-1) 的触发器 ...
+在处理时有错误发生：
+/var/cache/apt/archives/swig2.0_2.0.12-1ubuntu4_amd64.deb
+E: Sub-process /usr/bin/dpkg returned an error code (1)
+
+解决方法：
+1
+	
+sudo dpkg -i --force-overwrite /var/cache/apt/archives/*.deb
